@@ -53,4 +53,4 @@ LuxeRealEstate is a premier, high-end real estate marketplace designed for India
 - `firebase-applet-config.json`: Project-specific connection strings.
 
 ---
-© 2026 LuxeRealEstate - Designed for Excellence.
+© 2026 LuxeRealEstate - Designed for Excellen
