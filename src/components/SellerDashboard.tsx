@@ -22,7 +22,9 @@ import {
   Clock,
   User,
   Mail,
-  Phone
+  Phone,
+  Menu,
+  X
 } from 'lucide-react';
 
 interface Property {
@@ -46,6 +48,7 @@ interface Appointment {
 
 export default function SellerDashboard() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'profile' | 'appointments'>('dashboard');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [properties, setProperties] = useState<Property[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
@@ -177,13 +180,86 @@ export default function SellerDashboard() {
         </div>
       </aside>
 
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Drawer */}
+      <aside className={`fixed inset-y-0 left-0 w-72 bg-white z-50 transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col ${
+        isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        <div className="p-6 border-b border-gray-50 flex items-center justify-between">
+          <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <Building2 className="w-6 h-6 text-blue-600" />
+            Luxe Estate
+          </h1>
+          <button onClick={() => setIsMobileMenuOpen(false)}>
+            <X className="w-6 h-6 text-gray-400" />
+          </button>
+        </div>
+
+        <nav className="flex-1 p-4 space-y-2">
+          {[
+            { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+            { id: 'appointments', label: 'Appointments', icon: Calendar },
+            { id: 'profile', label: 'Profile Info', icon: User },
+          ].map((item) => (
+            <button 
+              key={item.id}
+              onClick={() => {
+                setActiveTab(item.id as any);
+                setIsMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all ${
+                activeTab === item.id ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:bg-gray-50'
+              }`}
+            >
+              <item.icon className="w-5 h-5" />
+              {item.label}
+            </button>
+          ))}
+          <button 
+            onClick={() => {
+              navigate('/add-property');
+              setIsMobileMenuOpen(false);
+            }}
+            className="w-full flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 rounded-xl font-medium transition-all"
+          >
+            <Plus className="w-5 h-5" />
+            Add Property
+          </button>
+        </nav>
+
+        <div className="p-4 border-t border-gray-50">
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-xl font-medium transition-all"
+          >
+            <LogOut className="w-5 h-5" />
+            Sign Out
+          </button>
+        </div>
+      </aside>
+
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
         {/* Header */}
-        <header className="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between sticky top-0 z-10">
-          <div>
-            <h2 className="text-lg font-bold text-gray-900">Welcome Back, {sellerData?.displayName || 'Partner'}</h2>
-            <p className="text-sm text-gray-400 font-bold uppercase tracking-[0.1em]">Luxury Estate Partner</p>
+        <header className="bg-white border-b border-gray-100 px-4 md:px-8 py-4 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="lg:hidden p-2 hover:bg-gray-50 rounded-lg"
+            >
+              <Menu className="w-6 h-6 text-gray-600" />
+            </button>
+            <div>
+              <h2 className="text-base md:text-lg font-bold text-gray-900">Welcome Back, {sellerData?.displayName?.split(' ')[0] || 'Partner'}</h2>
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.1em]">Luxury Estate Partner</p>
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <button 
@@ -199,7 +275,7 @@ export default function SellerDashboard() {
           </div>
         </header>
 
-        <div className="p-8 space-y-8">
+        <div className="p-4 md:p-8 space-y-6 md:space-y-8">
           {activeTab === 'dashboard' ? (
             <>
               {/* Stats */}

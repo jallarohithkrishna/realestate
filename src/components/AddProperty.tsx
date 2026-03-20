@@ -4,7 +4,7 @@ import { collection, addDoc, serverTimestamp, setDoc, doc, getDoc } from 'fireba
 import { db, auth, storage } from '../firebase';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
-import { ArrowLeft, Plus, Minus, Image as ImageIcon, MapPin, IndianRupee, Type, AlignLeft, LogOut, User, Navigation, Search, Maximize2, Minimize2, Layers, RotateCcw, Check, ChevronLeft, Bed, Square, Home } from 'lucide-react';
+import { ArrowLeft, Plus, Minus, Image as ImageIcon, MapPin, IndianRupee, Type, AlignLeft, LogOut, User, Navigation, Search, Maximize2, Minimize2, Layers, RotateCcw, Check, ChevronLeft, Bed, Square, Home, Waves, Dumbbell, Film, Cpu, Wine, Leaf, ArrowUpSquare, Users, Shield, Zap, Car, Building } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 
@@ -792,64 +792,46 @@ export default function AddProperty() {
                 <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 mb-3">
                   <span className="text-amber-500 text-sm shrink-0 mt-0.5">⚠️</span>
                   <p className="text-[11px] text-amber-800 leading-snug">
-                    <strong>For best accuracy:</strong> Type your city/area name in the search box and press <strong>Find Area</strong>. Then switch to <strong>Satellite</strong> view, zoom in, and click the exact rooftop. GPS alone may be off by 1–5&nbsp;km.
+                    <strong>For best accuracy:</strong> Type your area name in search, zoom in, and click the rooftop. GPS may be off by 1–5 km.
                   </p>
                 </div>
 
                 <div className="relative">
                   <div className="relative z-20">
-                      <div className="relative flex flex-col sm:flex-row gap-2">
-                        <div className="relative flex-1">
-                          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-blue-600" />
-                          <input
-                            type="text"
-                            placeholder="Search area or address..."
-                            className="w-full pl-11 md:pl-12 pr-4 py-3.5 md:py-4 bg-white border border-gray-100 rounded-xl md:rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all font-medium shadow-sm text-sm md:text-base"
-                            value={formData.location}
-                            onChange={(e) => {
-                              setFormData({...formData, location: e.target.value});
-                              setShowSuggestions(true);
-                            }}
-                            onFocus={() => setShowSuggestions(true)}
-                          />
-                          {formData.location && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setFormData({...formData, location: ''});
-                                setSuggestions([]);
-                                setShowSuggestions(false);
-                              }}
-                              className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full text-gray-400"
-                            >
-                              <RotateCcw className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                            </button>
-                          )}
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (formData.location.length < 3) {
-                              detectCurrentLocation();
-                            } else {
-                              performSearch(formData.location);
-                            }
+                    <div className="relative flex flex-col sm:flex-row gap-2">
+                      <div className="relative flex-1">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+                        <input
+                          type="text"
+                          placeholder="Search area or address..."
+                          className="w-full pl-11 md:pl-12 pr-4 py-3.5 md:py-4 bg-white border border-gray-100 rounded-xl md:rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all font-medium shadow-sm text-sm md:text-base"
+                          value={formData.location}
+                          onChange={(e) => {
+                            setFormData({...formData, location: e.target.value});
+                            setShowSuggestions(true);
                           }}
-                          className="bg-blue-600 text-white px-6 py-3 md:py-0 md:px-8 rounded-xl md:rounded-2xl font-black uppercase text-[10px] md:text-[11px] tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
-                        >
-                          <Search className="w-4 h-4" />
-                          {formData.location.length < 3 ? 'Locate Me' : 'Search Area'}
-                        </button>
+                          onFocus={() => setShowSuggestions(true)}
+                        />
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (formData.location.length < 3) {
+                            detectCurrentLocation();
+                          } else {
+                            performSearch(formData.location);
+                          }
+                        }}
+                        className="bg-blue-600 text-white px-6 py-3 md:py-0 md:px-8 rounded-xl md:rounded-2xl font-black uppercase text-[10px] md:text-[11px] tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
+                      >
+                        <Search className="w-4 h-4" />
+                        {formData.location.length < 3 ? 'Locate Me' : 'Search'}
+                      </button>
+                    </div>
                   </div>
 
-                  {/* Suggestions Popover */}
                   {showSuggestions && suggestions.length > 0 && (
-                    <div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-300 max-h-[350px] overflow-y-auto scrollbar-hide">
-                      <div className="p-3 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
-                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-2">Best Matches</span>
-                        <button onClick={() => setShowSuggestions(false)} className="text-[10px] font-bold text-blue-600 uppercase tracking-tighter hover:underline">Close</button>
-                      </div>
+                    <div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-300 max-h-[350px] overflow-y-auto">
                       {suggestions.map((s, i) => (
                         <button
                           key={i}
@@ -865,34 +847,17 @@ export default function AddProperty() {
                   )}
                 </div>
 
-                <div className={`${isMapFullscreen ? 'fixed inset-0 z-[100] bg-white p-2 sm:p-4 md:p-8 animate-in zoom-in-95 duration-300' : 'h-[300px] sm:h-[450px] md:h-[550px] w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-2xl z-0 relative'}`}>
+                <div className={`${isMapFullscreen ? 'fixed inset-0 z-[100] bg-white p-2 sm:p-4 md:p-8' : 'h-[350px] sm:h-[450px] md:h-[550px] w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-2xl z-0 relative'}`}>
                   {isMapFullscreen && (
                     <div className="absolute top-8 left-8 right-8 z-[10001] flex flex-col items-end gap-3 pointer-events-none">
                       <button 
                         type="button" 
                         onClick={() => setIsMapFullscreen(false)}
-                        className="bg-gray-900 text-white px-6 py-4 rounded-3xl shadow-2xl hover:scale-105 transition-all pointer-events-auto flex items-center gap-3 active:scale-95 border border-white/20"
+                        className="bg-gray-900 text-white px-6 py-4 rounded-3xl shadow-2xl hover:scale-105 transition-all pointer-events-auto flex items-center gap-3 border border-white/20"
                       >
                         <ChevronLeft className="w-5 h-5" />
                         <span className="text-xs font-black uppercase tracking-widest">Back to Form</span>
                       </button>
-
-                      <div className="flex bg-white/90 backdrop-blur-xl p-1.5 rounded-2xl shadow-2xl border border-white pointer-events-auto">
-                        <button
-                          type="button"
-                          onClick={() => setMapStyle('street')}
-                          className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${mapStyle === 'street' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-gray-500 hover:bg-gray-100'}`}
-                        >
-                          Normal
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setMapStyle('satellite')}
-                          className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${mapStyle === 'satellite' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-gray-500 hover:bg-gray-100'}`}
-                        >
-                          Satellite
-                        </button>
-                      </div>
                     </div>
                   )}
 
@@ -902,19 +867,13 @@ export default function AddProperty() {
                       center={[formData.lat || 20.5937, formData.lng || 78.9629]} 
                       zoom={formData.lat ? (isMapFullscreen ? 20 : 18) : 5}
                       scrollWheelZoom={false}
-                      dragging={true}
-                      doubleClickZoom={false}
                       style={{ height: '100%', width: '100%', cursor: 'crosshair' }}
                       zoomControl={false}
                       maxZoom={22}
-                      whenReady={() => {
-                        window.dispatchEvent(new Event('resize'));
-                      }}
                     >
                       <FlyController />
                       <ZoomControls />
                       <TileLayer
-                        key={mapStyle}
                         url={mapStyle === 'street' 
                           ? "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
                           : "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
@@ -932,98 +891,74 @@ export default function AddProperty() {
                       <MapResizer isFullscreen={isMapFullscreen} />
                       <ViewControl 
                          center={[formData.lat || 19.0760, formData.lng || 72.8777]} 
-                         zoom={formData.lat ? 18 : (isMapFullscreen ? 18 : 13)} 
+                         zoom={formData.lat ? 18 : 13} 
                       />
                     </MapContainer>
                   </div>
                   
-                  {/* Map Controls — top-right so never hidden by status bar */}
-                  <div className={`absolute ${isMapFullscreen ? 'top-12 right-12' : 'top-4 right-4'} z-[10001] flex flex-col gap-2`}>
-                    {!isMapFullscreen && (
-                      <button
-                        type="button"
-                        onClick={() => setMapStyle(mapStyle === 'street' ? 'satellite' : 'street')}
-                        className="bg-white/90 backdrop-blur-md px-3 py-2 rounded-2xl shadow-xl border border-white/50 hover:bg-white transition-all flex items-center gap-2"
-                        title="Toggle Style"
-                      >
-                        <Layers className="w-4 h-4 text-blue-600" />
-                        <span className="text-[10px] font-black uppercase text-gray-600">
-                          {mapStyle === 'street' ? 'Satellite' : 'Street'}
-                        </span>
-                      </button>
-                    )}
-                   </div>
+                  <div className={`absolute ${isMapFullscreen ? 'top-20 md:top-24 right-12' : 'top-3 right-3'} z-[10001] flex flex-col gap-2`}>
+                    <button
+                      type="button"
+                      onClick={() => setMapStyle(mapStyle === 'street' ? 'satellite' : 'street')}
+                      className="bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-xl shadow-xl border border-white/50 hover:bg-white transition-all flex items-center gap-2"
+                    >
+                      <Layers className="w-3.5 h-3.5 text-blue-600" />
+                      <span className="text-[9px] font-black uppercase text-gray-600 tracking-tight">{mapStyle === 'street' ? 'Satellite' : 'Street'}</span>
+                    </button>
+                  </div>
 
-                   {/* Locate Me button at bottom-left of map */}
-                   <div className={`absolute ${isMapFullscreen ? 'bottom-36 left-4 md:left-12' : 'bottom-20 md:bottom-[7.5rem] left-4 md:left-6'} z-10`}>
-                     <button
-                       type="button"
-                       onClick={detectCurrentLocation}
-                       disabled={locating}
-                       className="bg-white/90 backdrop-blur-md px-3 py-2.5 md:px-4 md:py-3 rounded-xl md:rounded-2xl shadow-xl border border-white/50 hover:bg-white transition-all flex items-center gap-2 md:gap-3 disabled:opacity-70"
-                       title="Locate Me"
-                     >
-                       <Navigation className={`w-4 h-4 md:w-5 md:h-5 text-blue-600 ${locating ? 'animate-spin' : ''}`} />
-                       <div className="text-left">
-                         <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-gray-800 leading-none">
-                           {locating ? 'GPS...' : 'My Location'}
-                         </p>
-                       </div>
-                     </button>
-                   </div>
+                  <div className={`absolute ${isMapFullscreen ? 'bottom-36 left-12' : 'bottom-20 left-3'} z-10`}>
+                    <button
+                      type="button"
+                      onClick={detectCurrentLocation}
+                      disabled={locating}
+                      className="bg-white/90 backdrop-blur-md px-2.5 py-2 rounded-xl shadow-xl border border-white/50 hover:bg-white transition-all flex items-center gap-2 disabled:opacity-70"
+                    >
+                      <Navigation className={`w-3.5 h-3.5 text-blue-600 ${locating ? 'animate-spin' : ''}`} />
+                      <span className="text-[9px] font-black uppercase tracking-widest text-gray-800 leading-none">{locating ? 'GPS...' : 'My Location'}</span>
+                    </button>
+                  </div>
 
-                  {/* Status & Bottom Controls Overlay */}
-                  <div className={`absolute ${isMapFullscreen ? 'bottom-12 md:bottom-16 left-4 md:left-12 right-4 md:right-12' : 'bottom-4 md:bottom-12 left-3 md:left-6 right-3 md:right-6'} z-10 pointer-events-none`}>
-                    <div className={`${locationPinned ? 'bg-green-600/95' : 'bg-white/95'} backdrop-blur-xl p-3 md:p-4 rounded-2xl md:rounded-3xl border border-white/20 shadow-2xl flex items-center justify-between pointer-events-auto`}>
-                      <div className="flex items-center gap-3 md:gap-4 overflow-hidden">
-                        <div className={`${locationPinned ? 'bg-white' : 'bg-blue-600'} p-2 md:p-3 rounded-xl md:rounded-2xl shadow-lg transition-colors shrink-0`}>
-                          {locationPinned ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-600" /> : <Navigation className="w-4 h-4 md:w-5 md:h-5 text-white animate-pulse" />}
+                  <div className={`absolute ${isMapFullscreen ? 'bottom-12 left-12 right-12' : 'bottom-3 left-2 right-2'} z-10 pointer-events-none`}>
+                    <div className={`${locationPinned ? 'bg-green-600/95' : 'bg-white/95'} backdrop-blur-xl p-2.5 rounded-xl border border-white/20 shadow-2xl flex items-center justify-between pointer-events-auto`}>
+                      <div className="flex items-center gap-2 overflow-hidden">
+                        <div className={`${locationPinned ? 'bg-white' : 'bg-blue-600'} p-2 rounded-xl shadow-lg shrink-0`}>
+                          {locationPinned ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Navigation className="w-3.5 h-3.5 text-white animate-pulse" />}
                         </div>
                         <div className="min-w-0">
-                          <p id="map-status-text" className={`text-[9px] md:text-[11px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] leading-none mb-1 truncate ${locationPinned ? 'text-white' : 'text-gray-900'}`}>
-                            {locationPinned ? 'Pinned' : 'Click to pin'}
-                          </p>
-                          <p id="map-status-sub" className={`text-[7px] md:text-[9px] font-bold uppercase tracking-widest leading-none truncate ${locationPinned ? 'text-white/70' : 'text-gray-500'}`}>
-                            {locationPinned ? 'Accurate location set' : 'Zoom in & click rooftop'}
-                          </p>
+                          <p className={`text-[8px] font-black uppercase tracking-tighter leading-none mb-1 truncate ${locationPinned ? 'text-white' : 'text-gray-900'}`}>{locationPinned ? 'Pinned' : 'Click rooftop'}</p>
+                          <p className={`text-[7px] font-bold uppercase tracking-widest leading-none truncate ${locationPinned ? 'text-white/70' : 'text-gray-500'}`}>{locationPinned ? 'Location Set' : 'Zoom & pin'}</p>
                         </div>
                       </div>
-                      
                       {locationPinned && (
                         <button
                           type="button"
-                          onClick={() => {
-                            setFormData(prev => ({ ...prev, lat: null, lng: null, location: '' }));
-                            setLocationPinned(false);
-                            setSuggestions([]);
-                          }}
-                          className="bg-white/10 text-white px-3 py-2 rounded-xl hover:bg-white/20 transition-all flex items-center gap-2 border border-white/20 shrink-0"
+                          onClick={() => { setFormData(prev => ({ ...prev, lat: null, lng: null, location: '' })); setLocationPinned(false); setSuggestions([]); }}
+                          className="bg-white/10 text-white px-2 py-1 rounded-lg hover:bg-white/20 transition-all border border-white/20 shrink-0"
                         >
-                          <RotateCcw className="w-4 h-4" />
-                          <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest hidden sm:block">Reset</span>
+                          <RotateCcw className="w-3 h-3" />
                         </button>
                       )}
                     </div>
-                  </div>
+                   </div>
                 </div>
 
-                  {/* Map Tools Footer */}
-                  <div className="flex flex-row gap-3 items-center justify-between bg-white border border-gray-100 p-3 md:p-4 rounded-2xl md:rounded-3xl shadow-sm">
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-blue-600 animate-ping"></div>
-                      <span className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest">Precision active</span>
-                    </div>
-                    {!isMapFullscreen && (
-                      <button
-                        type="button"
-                        onClick={() => setIsMapFullscreen(true)}
-                        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-xl md:rounded-2xl font-black uppercase text-[9px] md:text-[10px] tracking-widest transition-all shadow-lg"
-                      >
-                        <Maximize2 className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                        Expand
-                      </button>
-                    )}
+                <div className="flex flex-row gap-2 items-center justify-between bg-white border border-gray-100 p-2 rounded-xl shadow-sm">
+                  <div className="flex items-center gap-2 overflow-hidden">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-ping shrink-0"></div>
+                    <span className="text-[8px] font-bold text-gray-400 uppercase tracking-tighter truncate">Precision active</span>
                   </div>
+                  {!isMapFullscreen && (
+                    <button
+                      type="button"
+                      onClick={() => setIsMapFullscreen(true)}
+                      className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-xl font-black uppercase text-[8px] tracking-widest transition-all shadow-lg shrink-0"
+                    >
+                      <Maximize2 className="w-3 h-3" />
+                      Expand Map
+                    </button>
+                  )}
+                </div>
               </div>
 
               <div className="space-y-6">
@@ -1097,29 +1032,50 @@ export default function AddProperty() {
                    Amenities & Features
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {["Swimming Pool", "Private Gym", "Home Theater", "Smart Home", "Wine Cellar", "Zen Garden", "Private Lift", "Servant Quarters", "24/7 Security", "Power Backup", "EV Charging", "Club House"].map((amenity) => (
+                  {[
+                    { name: "Swimming Pool", icon: Waves },
+                    { name: "Private Gym", icon: Dumbbell },
+                    { name: "Home Theater", icon: Film },
+                    { name: "Smart Home", icon: Cpu },
+                    { name: "Wine Cellar", icon: Wine },
+                    { name: "Zen Garden", icon: Leaf },
+                    { name: "Private Lift", icon: ArrowUpSquare },
+                    { name: "Servant Quarters", icon: Users },
+                    { name: "24/7 Security", icon: Shield },
+                    { name: "Power Backup", icon: Zap },
+                    { name: "EV Charging", icon: Car },
+                    { name: "Club House", icon: Building }
+                  ].map((amenity) => (
                     <button
-                      key={amenity}
+                      key={amenity.name}
                       type="button"
                       onClick={() => {
                         const current = formData.amenities;
-                        const next = current.includes(amenity) 
-                          ? current.filter(a => a !== amenity)
-                          : [...current, amenity];
+                        const next = current.includes(amenity.name) 
+                          ? current.filter(a => a !== amenity.name)
+                          : [...current, amenity.name];
                         setFormData({...formData, amenities: next});
                       }}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all text-left ${
-                        formData.amenities.includes(amenity)
-                          ? 'bg-blue-50 border-blue-200 text-blue-700 shadow-sm'
-                          : 'bg-gray-50 border-gray-100 text-gray-500 hover:bg-gray-100'
+                      className={`flex items-center gap-2 px-3 py-3 rounded-2xl border transition-all text-left group overflow-hidden relative h-full ${
+                        formData.amenities.includes(amenity.name)
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-600/20'
+                          : 'bg-white border-gray-100 text-gray-500 hover:border-blue-200 hover:bg-blue-50/10'
                       }`}
                     >
-                      <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
-                        formData.amenities.includes(amenity) ? 'bg-blue-600 border-blue-600' : 'bg-white border-gray-300'
+                      <div className={`shrink-0 p-1.5 rounded-lg transition-colors ${
+                        formData.amenities.includes(amenity.name) ? 'bg-white/20' : 'bg-gray-50 group-hover:bg-blue-50'
                       }`}>
-                        {formData.amenities.includes(amenity) && <Check className="w-3 h-3 text-white" />}
+                        <amenity.icon className={`w-3.5 h-3.5 ${
+                          formData.amenities.includes(amenity.name) ? 'text-white' : 'text-blue-500'
+                        }`} />
                       </div>
-                      <span className="text-[11px] font-bold uppercase tracking-tight">{amenity}</span>
+                      <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-tight leading-tight break-words flex-1">{amenity.name}</span>
+                      
+                      {formData.amenities.includes(amenity.name) && (
+                        <div className="absolute top-1 right-1">
+                          <Check className="w-2.5 h-2.5 text-white/80" />
+                        </div>
+                      )}
                     </button>
                   ))}
                 </div>

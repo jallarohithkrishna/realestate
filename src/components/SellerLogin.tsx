@@ -125,19 +125,21 @@ export default function SellerLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 relative">
-      <button 
-        onClick={() => navigate('/selection')}
-        className="absolute top-8 left-8 flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors"
-      >
-        <ArrowLeft className="w-5 h-5" />
-        Back to Selection
-      </button>
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 relative overflow-x-hidden">
+      <div className="w-full max-w-md absolute top-0 left-1/2 -translate-x-1/2 p-4 md:p-8">
+        <button 
+          onClick={() => navigate('/selection')}
+          className="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-bold text-xs uppercase tracking-widest"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </button>
+      </div>
 
-      <div className="max-w-md w-full">
+      <div className="max-w-md w-full mt-16 md:mt-0">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            {isLogin ? 'Seller Login' : 'Create Seller Account'}
+          <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-2 uppercase tracking-tight">
+            {isLogin ? 'Seller Login' : 'Create Account'}
           </h1>
           <p className="text-gray-500">
             {isLogin 
