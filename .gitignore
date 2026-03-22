@@ -8,4 +8,6 @@ coverage/
 !.env.example
 firebase-applet-config.json
 .firebase/
+firestore.rules
+storage.rules
 firebasestorage.rules
