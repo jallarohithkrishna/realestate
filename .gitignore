@@ -11,3 +11,6 @@ firebase-applet-config.json
 firestore.rules
 storage.rules
 firebasestorage.rules
+firebase.json
+.firebaserc
+firebase-blueprint.json
