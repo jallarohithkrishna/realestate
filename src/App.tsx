@@ -12,7 +12,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <div className="min-h-screen bg-white font-sans selection:bg-blue-100 selection:text-blue-900">
+        <div className="min-h-screen bg-slate-950 font-sans">
           <Routes>
             {/* Landing & Selection */}
             <Route path="/" element={<AuthSelection />} />

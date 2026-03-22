@@ -143,23 +143,23 @@ export default function PropertyDetails() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400"></div>
       </div>
     );
   }
 
   if (!property) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
-        <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-          <Info className="w-10 h-10 text-gray-400" />
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center px-4 text-center">
+        <div className="w-24 h-24 glass-card rounded-full flex items-center justify-center mb-6">
+          <Info className="w-10 h-10 text-gray-500" />
         </div>
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">Property Not Found</h2>
+        <h2 className="text-3xl font-bold text-white mb-2">Property Not Found</h2>
         <p className="text-gray-500 mb-8 max-w-xs">The listing you're looking for might have been removed or is no longer available.</p>
         <button 
           onClick={() => navigate('/viewer')}
-          className="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 flex items-center gap-2"
+          className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 px-8 py-3 rounded-xl font-bold hover:from-amber-300 hover:to-amber-400 transition-all shadow-lg glow-amber flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </button>
@@ -189,19 +189,19 @@ export default function PropertyDetails() {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-slate-950 pb-20">
       {/* Header */}
-      <div className="bg-white border-b border-gray-100 sticky top-0 z-50">
+      <div className="bg-slate-950/80 backdrop-blur-xl border-b border-white/[0.06] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <button 
             onClick={() => navigate('/viewer')}
-            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-all font-bold group"
+            className="flex items-center gap-2 text-gray-400 hover:text-amber-400 transition-all font-bold group"
           >
             <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
             <span>Back to Listings</span>
           </button>
           <div className="flex items-center gap-3">
-             <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Listing ID: {property.id.slice(0, 8)}</span>
+             <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">Listing ID: {property.id.slice(0, 8)}</span>
           </div>
         </div>
       </div>
@@ -210,21 +210,22 @@ export default function PropertyDetails() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Column: Media */}
           <div className="space-y-6">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] bg-gray-100 group">
+            <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] bg-slate-900 group border border-white/[0.06]">
               <img 
                 src={allImages[activeImage]} 
                 alt={property.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
               <div className="absolute top-6 left-6 flex flex-col gap-2">
-                <span className="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg flex items-center gap-2">
+                <span className="bg-amber-400 text-slate-950 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5" />
                   {property.propertyType || 'Luxe Listing'}
                 </span>
               </div>
               <div className="absolute bottom-6 right-6">
-                <div className="bg-black/50 backdrop-blur-md text-white px-3 py-1.5 rounded-lg text-[10px] font-bold">
+                <div className="bg-slate-950/60 backdrop-blur-md text-white px-3 py-1.5 rounded-lg text-[10px] font-bold border border-white/10">
                   {activeImage + 1} / {allImages.length}
                 </div>
               </div>
@@ -237,7 +238,7 @@ export default function PropertyDetails() {
                     key={idx}
                     onClick={() => setActiveImage(idx)}
                     className={`relative flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
-                      activeImage === idx ? 'border-blue-600 ring-4 ring-blue-50' : 'border-transparent opacity-70 hover:opacity-100'
+                      activeImage === idx ? 'border-amber-400 ring-4 ring-amber-400/10' : 'border-white/[0.06] opacity-70 hover:opacity-100'
                     }`}
                   >
                     <img src={img} className="w-full h-full object-cover" alt="" />
@@ -250,55 +251,55 @@ export default function PropertyDetails() {
           {/* Right Column: Info & Contact */}
           <div className="flex flex-col space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl font-extrabold text-gray-900 leading-tight">{property.title}</h1>
-              <div className="flex items-center gap-2 text-gray-500 font-bold">
-                <MapPin className="w-5 h-5 text-blue-600" />
+              <h1 className="text-4xl font-extrabold text-white leading-tight">{property.title}</h1>
+              <div className="flex items-center gap-2 text-gray-400 font-bold">
+                <MapPin className="w-5 h-5 text-amber-400" />
                 <span>{property.location}</span>
               </div>
-              <div className="flex items-center gap-4 text-3xl font-black text-blue-600">
-                <IndianRupee className="w-8 h-8" />
+              <div className="flex items-center gap-4 text-3xl font-black text-gradient-gold">
+                <IndianRupee className="w-8 h-8 text-amber-400" />
                 <span>{property.price}</span>
               </div>
             </div>
 
             {/* Core Stats */}
-            <div className="grid grid-cols-3 gap-4 border-y border-gray-100 py-6">
+            <div className="grid grid-cols-3 gap-4 border-y border-white/[0.06] py-6">
               <div className="text-center md:text-left">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Configuration</p>
-                <div className="flex items-center justify-center md:justify-start gap-2 text-gray-900 font-bold">
-                  <Bed className="w-4 h-4 text-blue-600" />
+                <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Configuration</p>
+                <div className="flex items-center justify-center md:justify-start gap-2 text-white font-bold">
+                  <Bed className="w-4 h-4 text-amber-400" />
                   <span>{property.bhk || 'N/A'}</span>
                 </div>
               </div>
-              <div className="text-center md:text-left border-x border-gray-100">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Carpet Area</p>
-                <div className="flex items-center justify-center md:justify-start gap-2 text-gray-900 font-bold">
-                  <Square className="w-4 h-4 text-blue-600" />
+              <div className="text-center md:text-left border-x border-white/[0.06]">
+                <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Carpet Area</p>
+                <div className="flex items-center justify-center md:justify-start gap-2 text-white font-bold">
+                  <Square className="w-4 h-4 text-amber-400" />
                   <span>{property.area || 'N/A'}</span>
                 </div>
               </div>
               <div className="text-center md:text-left">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Developer</p>
-                <div className="flex items-center justify-center md:justify-start gap-2 text-gray-900 font-bold truncate">
-                  <User className="w-4 h-4 text-blue-600" />
+                <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Developer</p>
+                <div className="flex items-center justify-center md:justify-start gap-2 text-white font-bold truncate">
+                  <User className="w-4 h-4 text-amber-400" />
                   <span>{property.builderName || 'Exclusive'}</span>
                 </div>
               </div>
             </div>
 
             <div className="space-y-4">
-               <h3 className="text-lg font-black text-gray-900 uppercase tracking-[0.2em]">Description</h3>
-               <p className="text-gray-600 leading-relaxed font-medium whitespace-pre-line">
+               <h3 className="text-lg font-black text-white uppercase tracking-[0.2em]">Description</h3>
+               <p className="text-gray-400 leading-relaxed font-medium whitespace-pre-line">
                  {property.description}
                </p>
             </div>
 
             {/* Appointment Section - Only visible if user is not the owner */}
             {(!user || user.uid !== property.sellerUid) && (
-              <div className="bg-gray-900 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
-                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600 opacity-20 blur-3xl -mr-16 -mt-16"></div>
+              <div className="glass-card rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden border-amber-400/10">
+                 <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400 opacity-10 blur-3xl -mr-16 -mt-16"></div>
                  <h3 className="text-2xl font-black mb-2 flex items-center gap-3">
-                   <Calendar className="w-6 h-6 text-blue-400" />
+                   <Calendar className="w-6 h-6 text-amber-400" />
                    Schedule a Private Visit
                  </h3>
                  
@@ -346,7 +347,7 @@ export default function PropertyDetails() {
                          type="text" 
                          defaultValue={user.displayName || ''}
                          placeholder="Your Name" 
-                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-bold"
+                         className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-amber-400/30 transition-all font-bold"
                        />
                        <input 
                          required
@@ -359,7 +360,7 @@ export default function PropertyDetails() {
                            target.value = target.value.replace(/[^0-9]/g, '');
                          }}
                          placeholder="10-Digit Mobile Number" 
-                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-bold"
+                         className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-amber-400/30 transition-all font-bold"
                        />
                      </div>
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -369,7 +370,7 @@ export default function PropertyDetails() {
                            required
                            name="viewingDate"
                            type="date" 
-                           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-bold"
+                           className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-amber-400/30 transition-all font-bold"
                          />
                        </div>
                        <div className="space-y-1">
@@ -378,11 +379,11 @@ export default function PropertyDetails() {
                            required
                            name="viewingTime"
                            type="time" 
-                           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-bold"
+                           className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-amber-400/30 transition-all font-bold"
                          />
                        </div>
                      </div>
-                     <button className="w-full bg-blue-600 text-white py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg hover:bg-blue-700 transition-all active:scale-95">
+                     <button className="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg hover:from-amber-300 hover:to-amber-400 transition-all active:scale-95">
                        Request Private Viewing
                      </button>
                    </form>
@@ -396,7 +397,7 @@ export default function PropertyDetails() {
                       </p>
                       <button 
                         onClick={handleLogin}
-                        className="w-full bg-blue-600 text-white py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg hover:bg-blue-700 transition-all active:scale-95 flex items-center justify-center gap-3"
+                        className="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg hover:bg-blue-700 transition-all active:scale-95 flex items-center justify-center gap-3"
                       >
                         <img src="https://www.google.com/favicon.ico" alt="Google" className="w-4 h-4 rounded-sm" />
                         Sign in with Google
@@ -410,18 +411,18 @@ export default function PropertyDetails() {
 
         {/* Estate Features Section */}
         {property.amenities && property.amenities.length > 0 && (
-          <div className="mt-16 border-t border-gray-100 pt-16">
-            <h2 className="text-2xl font-black text-gray-900 mb-10 flex items-center gap-4">
-              <Sparkles className="w-7 h-7 text-blue-600" />
+          <div className="mt-16 border-t border-white/[0.06] pt-16">
+            <h2 className="text-2xl font-black text-white mb-10 flex items-center gap-4">
+              <Sparkles className="w-7 h-7 text-amber-400" />
               Property Amenities
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
               {property.amenities.map((amenity) => (
-                <div key={amenity} className="flex items-center gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 transition-all hover:shadow-md">
-                  <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-blue-600 shadow-sm">
+                <div key={amenity} className="flex items-center gap-4 p-5 rounded-2xl glass-card glass-card-hover transition-all">
+                  <div className="w-10 h-10 bg-amber-400/10 rounded-xl flex items-center justify-center text-amber-400">
                     {getAmenityIcon(amenity)}
                   </div>
-                  <span className="text-[10px] font-black text-gray-700 uppercase tracking-widest">{amenity}</span>
+                  <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">{amenity}</span>
                 </div>
               ))}
             </div>
@@ -429,20 +430,20 @@ export default function PropertyDetails() {
         )}
 
         {/* Location Section */}
-        <div className="mt-16 border-t border-gray-100 pt-16">
+        <div className="mt-16 border-t border-white/[0.06] pt-16">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-black text-gray-900 flex items-center gap-4">
-              <MapPin className="w-7 h-7 text-blue-600" />
+            <h2 className="text-2xl font-black text-white flex items-center gap-4">
+              <MapPin className="w-7 h-7 text-amber-400" />
               Location Details
             </h2>
             <button
                onClick={() => setMapStyle(mapStyle === 'street' ? 'satellite' : 'street')}
-               className="text-[10px] font-black uppercase tracking-widest text-blue-600 bg-blue-50 px-4 py-2 rounded-full hover:bg-blue-100 transition-colors"
+               className="text-[10px] font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 px-4 py-2 rounded-full hover:bg-amber-400/20 transition-colors"
             >
                {mapStyle === 'street' ? 'Satellite View' : 'Street View'}
             </button>
           </div>
-          <div className="rounded-3xl overflow-hidden shadow-lg border border-gray-100 border-b-0 h-[480px] bg-gray-50">
+          <div className="rounded-3xl overflow-hidden shadow-lg border border-white/[0.06] border-b-0 h-[480px] bg-slate-900">
             <iframe
               title="Property Location"
               width="100%"
@@ -455,7 +456,7 @@ export default function PropertyDetails() {
               className="w-full h-full"
             ></iframe>
           </div>
-          <div className="bg-gray-50 p-6 rounded-b-3xl border-x border-b border-gray-100 flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
+          <div className="glass-card p-6 rounded-b-3xl flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
              <div className="w-2 h-2 rounded-full bg-green-500"></div>
              Physically Verified Property Location
           </div>

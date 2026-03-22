@@ -9,7 +9,7 @@ import {
   signInWithPopup
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { Mail, Lock, Phone, MapPin, Loader2, ArrowLeft } from 'lucide-react';
+import { Mail, Lock, Phone, MapPin, Loader2, ArrowLeft, Sparkles, ChevronRight } from 'lucide-react';
 
 export default function SellerLogin() {
   const [isLogin, setIsLogin] = useState(true);
@@ -124,27 +124,43 @@ export default function SellerLogin() {
     }
   };
 
+  const inputClass = "w-full pl-12 pr-5 py-4 bg-white/[0.04] border border-white/[0.08] rounded-2xl focus:border-amber-400/40 focus:bg-white/[0.06] transition-all outline-none text-white placeholder:text-gray-500 font-medium";
+
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 relative overflow-x-hidden">
-      <div className="w-full max-w-md absolute top-0 left-1/2 -translate-x-1/2 p-4 md:p-8">
+    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+      {/* Ambient background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/3 -left-32 w-80 h-80 bg-amber-400/[0.04] rounded-full blur-[120px] animate-glow-pulse"></div>
+        <div className="absolute bottom-1/3 -right-32 w-80 h-80 bg-amber-500/[0.03] rounded-full blur-[120px] animate-glow-pulse" style={{ animationDelay: '1.5s' }}></div>
+      </div>
+
+      <div className="w-full max-w-md absolute top-0 left-1/2 -translate-x-1/2 p-4 md:p-8 z-10">
         <button 
           onClick={() => navigate('/selection')}
-          className="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-bold text-xs uppercase tracking-widest"
+          className="flex items-center gap-2 text-gray-500 hover:text-amber-400 transition-colors font-bold text-xs uppercase tracking-widest"
         >
           <ArrowLeft className="w-4 h-4" />
           Back
         </button>
       </div>
 
-      <div className="max-w-md w-full mt-16 md:mt-0">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-2 uppercase tracking-tight">
-            {isLogin ? 'Seller Login' : 'Create Account'}
+      <div className="max-w-md w-full mt-16 md:mt-0 relative z-10">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-2xl glow-amber relative group">
+              <Sparkles className="w-6 h-6 text-slate-950 group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-x-0 -bottom-8 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <span className="text-[8px] font-black uppercase tracking-[0.3em] text-amber-400/60">Partner Portal</span>
+              </div>
+            </div>
+          </div>
+          <h1 className="text-4xl font-black text-white mb-3 uppercase tracking-tighter">
+            {isLogin ? 'Seller Login' : 'Partner Access'}
           </h1>
-          <p className="text-gray-500">
+          <p className="text-gray-500 text-sm font-medium tracking-wide">
             {isLogin 
-              ? 'Access your luxury property portfolio' 
-              : 'Join as a luxury real estate partner'}
+              ? 'Institutional-grade property management' 
+              : 'Join as an exclusive real estate partner'}
           </p>
         </div>
 
@@ -152,10 +168,10 @@ export default function SellerLogin() {
           <button
             onClick={handleGoogleLogin}
             disabled={googleLoading}
-            className="w-full mb-6 py-4 bg-white border border-gray-100 rounded-2xl font-bold text-gray-700 hover:bg-gray-50 transition-all shadow-sm flex items-center justify-center gap-3 disabled:opacity-70"
+            className="w-full mb-6 py-4 glass-card rounded-2xl font-bold text-gray-300 hover:text-white hover:border-amber-400/20 transition-all flex items-center justify-center gap-3 disabled:opacity-70"
           >
             {googleLoading ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
+              <Loader2 className="w-5 h-5 animate-spin text-amber-400" />
             ) : (
               <>
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" />
@@ -166,12 +182,12 @@ export default function SellerLogin() {
         )}
 
         {isLogin && (
-          <div className="relative mb-6">
+          <div className="relative mb-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-100"></div>
+              <div className="w-full border-t border-white/[0.04]"></div>
             </div>
-            <div className="relative flex justify-center text-sm uppercase">
-              <span className="bg-white px-4 text-gray-400 font-bold">Or continue with email</span>
+            <div className="relative flex justify-center text-[10px] uppercase tracking-[0.2em] font-black">
+              <span className="bg-slate-950 px-4 text-gray-700">Enterprise Protocol</span>
             </div>
           </div>
         )}
@@ -184,32 +200,32 @@ export default function SellerLogin() {
                 placeholder="Full Name"
                 value={formData.displayName}
                 onChange={(e) => setFormData({...formData, displayName: e.target.value})}
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all outline-none"
+                className="w-full px-5 py-4 bg-white/[0.04] border border-white/[0.08] rounded-2xl focus:border-amber-400/40 focus:bg-white/[0.06] transition-all outline-none text-white placeholder:text-gray-500 font-medium"
                 required
               />
             </div>
           )}
 
           <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600" />
             <input
               type="email"
               placeholder="Email Address"
               value={formData.email}
               onChange={(e) => setFormData({...formData, email: e.target.value})}
-              className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all outline-none"
+              className={inputClass}
               required
             />
           </div>
 
           <div className="relative">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600" />
             <input
               type="password"
               placeholder="Password"
               value={formData.password}
               onChange={(e) => setFormData({...formData, password: e.target.value})}
-              className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all outline-none"
+              className={inputClass}
               required
             />
           </div>
@@ -217,7 +233,7 @@ export default function SellerLogin() {
           {!isLogin && (
             <>
               <div className="relative">
-                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600" />
                 <input
                   type="tel"
                   placeholder="Mobile Number"
@@ -226,18 +242,18 @@ export default function SellerLogin() {
                     const val = e.target.value.replace(/\D/g, '').slice(0, 10);
                     setFormData({...formData, mobile: val});
                   }}
-                  className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all outline-none"
+                  className={inputClass}
                   required
                 />
               </div>
 
               <div className="relative">
-                <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <MapPin className="absolute left-4 top-5 w-5 h-5 text-gray-600" />
                 <textarea
                   placeholder="Business Address"
                   value={formData.address}
                   onChange={(e) => setFormData({...formData, address: e.target.value})}
-                  className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all outline-none min-h-[100px]"
+                  className="w-full pl-12 pr-5 py-4 bg-white/[0.04] border border-white/[0.08] rounded-2xl focus:border-amber-400/40 focus:bg-white/[0.06] transition-all outline-none text-white placeholder:text-gray-500 font-medium min-h-[100px]"
                   required
                 />
               </div>
@@ -245,7 +261,7 @@ export default function SellerLogin() {
           )}
 
           {error && (
-            <div className="p-4 bg-red-50 text-red-600 rounded-2xl text-sm border border-red-100">
+            <div className="p-4 bg-red-500/10 text-red-400 rounded-2xl text-sm border border-red-500/20">
               {error}
             </div>
           )}
@@ -253,12 +269,15 @@ export default function SellerLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-70"
+            className="w-full py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:from-amber-300 hover:to-amber-400 transition-all shadow-xl glow-amber flex items-center justify-center gap-3 disabled:opacity-70 active:scale-[0.98]"
           >
             {loading ? (
               <Loader2 className="w-5 h-5 animate-spin" />
             ) : (
-              isLogin ? 'Sign In' : 'Create Account'
+              <>
+                {isLogin ? 'Authenticate' : 'Establish Account'}
+                <ChevronRight className="w-4 h-4 opacity-70" />
+              </>
             )}
           </button>
         </form>
@@ -266,7 +285,7 @@ export default function SellerLogin() {
         <div className="mt-8 text-center text-gray-500">
           <button 
             onClick={() => setIsLogin(!isLogin)}
-            className="text-blue-600 font-bold hover:underline"
+            className="text-amber-400 font-bold hover:underline"
           >
             {isLogin 
               ? "Don't have an account? Sign Up" 

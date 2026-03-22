@@ -23,29 +23,29 @@ function BuyerHome() {
   }, []);
 
   return (
-    <main className="relative">
+    <main className="relative bg-slate-950">
       {/* Top Right Header */}
       <div className="absolute top-4 right-4 md:top-6 md:right-6 z-[100] flex items-center gap-2 md:gap-4">
         <button 
           onClick={() => navigate('/selection')}
-          className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl border border-gray-100 shadow-sm text-sm font-bold text-gray-900 hover:bg-gray-50 transition-all font-sans"
+          className="glass-card px-4 py-2 rounded-xl text-sm font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-all font-sans"
         >
           Change Portal
         </button>
 
         {user && (
-          <div className="hidden md:flex flex-col items-end bg-white/80 backdrop-blur-md px-4 py-2 rounded-xl border border-gray-100 shadow-sm font-sans">
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">Welcome back</span>
+          <div className="hidden md:flex flex-col items-end glass-card px-4 py-2 rounded-xl font-sans">
+            <span className="text-[10px] font-bold text-amber-400/70 uppercase tracking-widest leading-none mb-1">Welcome back</span>
             <div className="flex items-center gap-2">
-              <User className="w-3 h-3 text-blue-600" />
-              <span className="text-sm font-bold text-gray-900">{user.displayName || 'Luxury Partner'}</span>
+              <User className="w-3 h-3 text-amber-400" />
+              <span className="text-sm font-bold text-white">{user.displayName || 'Luxury Partner'}</span>
             </div>
           </div>
         )}
         
         <button 
           onClick={() => navigate('/add-property')}
-          className="bg-blue-600 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-xl flex items-center gap-2 text-sm md:text-base font-sans"
+          className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 px-4 py-2 md:px-5 md:py-2.5 rounded-xl font-bold hover:from-amber-300 hover:to-amber-400 transition-all shadow-xl glow-amber flex items-center gap-2 text-sm md:text-base font-sans active:scale-95"
         >
           <Plus className="w-4 h-4 md:w-5 md:h-5" />
           <span className="hidden xs:inline">Add Property</span>
@@ -55,7 +55,7 @@ function BuyerHome() {
         {user && (
           <button 
             onClick={() => auth.signOut()}
-            className="md:hidden bg-white/90 backdrop-blur-sm p-2 rounded-xl border border-gray-100 shadow-xl text-red-600"
+            className="md:hidden glass-card p-2 rounded-xl text-red-400"
             title="Logout"
           >
             <LogOut className="w-5 h-5" />

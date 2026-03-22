@@ -398,7 +398,7 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
   if (loading) {
     return (
       <div className="py-20 flex justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400"></div>
       </div>
     );
   }
@@ -407,8 +407,8 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
     <section className="py-20 px-4 max-w-7xl mx-auto" id="listings">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
         <div>
-          <span className="text-blue-600 font-bold tracking-[0.2em] text-xs uppercase mb-2 block">Premium Selection</span>
-          <h2 className="text-4xl font-bold text-gray-900">Featured Listings</h2>
+          <span className="text-amber-400 font-bold tracking-[0.2em] text-xs uppercase mb-2 block">Premium Selection</span>
+          <h2 className="text-4xl font-bold text-white">Featured Listings</h2>
         </div>
         
         <div className="w-full md:w-auto flex flex-col md:flex-row gap-4 items-stretch md:items-center">
@@ -418,30 +418,30 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
               placeholder="Search by title or location..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all text-sm"
+              className="w-full pl-10 pr-4 py-3 glass-card rounded-xl focus:outline-none focus:border-amber-400/30 transition-all text-sm text-white placeholder:text-gray-500"
             />
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-amber-400" />
           </div>
 
           <button 
             onClick={() => setShowFilters(!showFilters)}
-            className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl border transition-all font-bold text-sm ${showFilters ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-600/20' : 'bg-white text-gray-700 border-gray-100 hover:bg-gray-50 shadow-sm'}`}
+            className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl border transition-all font-bold text-sm ${showFilters ? 'bg-amber-400 text-slate-950 border-amber-400 shadow-lg glow-amber' : 'glass-card text-gray-400 hover:text-white hover:border-amber-400/20'}`}
           >
             {showFilters ? <X className="w-4 h-4" /> : <Filter className="w-4 h-4" />}
             {showFilters ? 'Hide Filters' : 'Filters'}
           </button>
 
-          <div className="flex bg-gray-50 p-1 rounded-xl border border-gray-100 shadow-sm">
+          <div className="flex glass-card p-1 rounded-xl">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white text-blue-600 shadow-md' : 'text-gray-400 hover:text-gray-600'}`}
+              className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-amber-400/20 text-amber-400 shadow-md' : 'text-gray-500 hover:text-gray-300'}`}
               title="Grid View"
             >
               <LayoutGrid className="w-5 h-5" />
             </button>
             <button
               onClick={() => setViewMode('map')}
-              className={`p-2 rounded-lg transition-all ${viewMode === 'map' ? 'bg-white text-blue-600 shadow-md' : 'text-gray-400 hover:text-gray-600'}`}
+              className={`p-2 rounded-lg transition-all ${viewMode === 'map' ? 'bg-amber-400/20 text-amber-400 shadow-md' : 'text-gray-500 hover:text-gray-300'}`}
               title="Map View"
             >
               <MapIcon className="w-5 h-5" />
@@ -451,15 +451,15 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
       </div>
 
       {showFilters && (
-        <div className="bg-gray-50/50 backdrop-blur-sm p-6 rounded-[2rem] border border-gray-100 mb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-in slide-in-from-top-4 duration-300">
+        <div className="glass-card p-6 rounded-[2rem] mb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div>
-            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Popular Cities</label>
+            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-1">Popular Cities</label>
             <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600" />
+              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-amber-400" />
               <select 
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-white border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/10 transition-all text-sm font-bold text-gray-700 appearance-none cursor-pointer"
+                className="w-full pl-10 pr-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-xl focus:outline-none focus:border-amber-400/30 transition-all text-sm font-bold text-gray-300 appearance-none cursor-pointer"
               >
                 <option value="Any">Any Location</option>
                 {POPULAR_CITIES.map(city => (
@@ -470,9 +470,9 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
           </div>
 
           <div>
-            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Budget</label>
+            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-1">Budget</label>
             <div className="relative">
-              <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600" />
+              <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-amber-400" />
               <select 
                 value={budgetRange}
                 onChange={(e) => setBudgetRange(e.target.value)}
@@ -499,9 +499,9 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
           </div>
 
           <div>
-            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Property Type</label>
+            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-1">Property Type</label>
             <div className="relative">
-              <Home className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600" />
+              <Home className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-amber-400" />
               <select 
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
@@ -526,7 +526,7 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
                 setBudgetRange('Any');
                 setSearchTerm('');
               }}
-              className="w-full py-3 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors"
+              className="w-full py-3 text-[10px] font-black uppercase tracking-widest text-gray-500 hover:text-red-400 transition-colors"
             >
               Reset All Filters
             </button>
@@ -541,8 +541,8 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
       ) : (
         <>
           {filteredProperties.length === 0 ? (
-            <div className="text-center py-20 bg-gray-50 rounded-[2.5rem] border-2 border-dashed border-gray-200">
-              <p className="text-gray-500 text-lg">No properties found matching your search.</p>
+            <div className="text-center py-20 glass-card rounded-[2.5rem] border-2 border-dashed border-white/[0.06]">
+              <p className="text-gray-400 text-lg">No properties found matching your search.</p>
               <button 
                 onClick={() => {
                   setSearchTerm('');
@@ -550,7 +550,7 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
                   setSelectedType('Any');
                   setBudgetRange('Any');
                 }}
-                className="mt-6 bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 text-sm"
+                className="mt-6 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 px-8 py-3 rounded-xl font-bold hover:from-amber-300 hover:to-amber-400 transition-all shadow-lg glow-amber text-sm"
               >
                 Clear All Filters
               </button>
@@ -560,7 +560,7 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
               {filteredProperties.map((property) => (
                 <div 
                   key={property.id} 
-                  className="group bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col h-full"
+                  className="group glass-card rounded-3xl overflow-hidden glass-card-hover transition-all duration-500 flex flex-col h-full"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
@@ -569,40 +569,41 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                    <div className="absolute top-4 left-4 bg-amber-400/90 backdrop-blur-md text-slate-950 text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">
                       FEATURED
                     </div>
-                    <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-2xl font-bold text-gray-900 shadow-xl">
+                    <div className="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-2xl font-bold text-amber-400 shadow-xl border border-white/[0.06]">
                       {property.price}
                     </div>
                   </div>
                   
                   <div className="p-6 flex flex-col flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{property.title}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">{property.title}</h3>
                     <p className="text-gray-500 text-sm mb-4 flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-blue-600" />
+                      <MapPin className="w-4 h-4 text-amber-400" />
                       {property.location}
                     </p>
 
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       {property.bhk && (
-                        <div className="flex items-center gap-2 bg-gray-50 p-2 rounded-xl">
-                          <Bed className="w-4 h-4 text-blue-600" />
-                          <span className="text-xs font-bold text-gray-700">{property.bhk}</span>
+                        <div className="flex items-center gap-2 bg-white/[0.04] p-2 rounded-xl border border-white/[0.06]">
+                          <Bed className="w-4 h-4 text-amber-400" />
+                          <span className="text-xs font-bold text-gray-300">{property.bhk}</span>
                         </div>
                       )}
                       {property.area && (
-                        <div className="flex items-center gap-2 bg-gray-50 p-2 rounded-xl">
-                          <Square className="w-4 h-4 text-blue-600" />
-                          <span className="text-xs font-bold text-gray-700">{property.area}</span>
+                        <div className="flex items-center gap-2 bg-white/[0.04] p-2 rounded-xl border border-white/[0.06]">
+                          <Square className="w-4 h-4 text-amber-400" />
+                          <span className="text-xs font-bold text-gray-300">{property.area}</span>
                         </div>
                       )}
                       {property.builderName && (
-                        <div className="col-span-2 flex items-center gap-2 bg-gray-50 p-2 rounded-xl">
-                          <div className="w-4 h-4 rounded-full bg-blue-100 flex items-center justify-center">
-                            <User className="w-2.5 h-2.5 text-blue-600" />
+                        <div className="col-span-2 flex items-center gap-2 bg-white/[0.04] p-2 rounded-xl border border-white/[0.06]">
+                          <div className="w-4 h-4 rounded-full bg-amber-400/20 flex items-center justify-center">
+                            <User className="w-2.5 h-2.5 text-amber-400" />
                           </div>
-                          <span className="text-xs font-medium text-gray-500 truncate">By <span className="text-gray-900 font-bold">{property.builderName}</span></span>
+                          <span className="text-xs font-medium text-gray-500 truncate">By <span className="text-white font-bold">{property.builderName}</span></span>
                         </div>
                       )}
                     </div>
@@ -610,7 +611,7 @@ export default function FeaturedListings({ searchTerm, setSearchTerm }: Featured
                     <div className="mt-auto">
                       <button 
                         onClick={() => navigate(`/property/${property.id}`)}
-                        className="w-full py-4 bg-gray-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-lg shadow-black/5"
+                        className="w-full py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 rounded-2xl font-bold hover:from-amber-300 hover:to-amber-400 transition-all shadow-lg glow-amber active:scale-[0.98]"
                       >
                         View Details
                       </button>
